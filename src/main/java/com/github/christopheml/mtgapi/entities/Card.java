@@ -51,6 +51,8 @@ public class Card {
 
     private List<Ruling> rulings;
 
+    private Set<ForeignName> foreignNames;
+
     public String getName() {
         return name;
     }
@@ -212,4 +214,11 @@ public class Card {
         this.rulings = rulings;
     }
 
+    public Set<ForeignName> getForeignNames() {
+        return foreignNames;
+    }
+
+    public void setForeignNames(Set<ForeignName> foreignNames) {
+        this.foreignNames = foreignNames;
+    }
 }

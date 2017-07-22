@@ -2,11 +2,14 @@ package com.github.christopheml.mtgapi.assertions;
 
 import com.github.christopheml.mtgapi.entities.Card;
 import com.github.christopheml.mtgapi.entities.Color;
+import com.github.christopheml.mtgapi.entities.ForeignName;
 import com.github.christopheml.mtgapi.entities.Rarity;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.internal.Iterables;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class CardAssert extends AbstractAssert<CardAssert, Card> {
 
@@ -196,6 +199,16 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         isNotNull();
 
         iterables.assertContainsExactlyInAnyOrder(info, actual.getSubtypes(), subtypes);
+
+        return this;
+    }
+
+    public CardAssert hasExactlyForeignNamesFor(String... languages) {
+        isNotNull();
+
+        Set<String> actualLanguages = actual.getForeignNames().stream().map(ForeignName::getLanguage).collect(Collectors.toSet());
+
+        iterables.assertContainsExactlyInAnyOrder(info, actualLanguages, languages);
 
         return this;
     }
