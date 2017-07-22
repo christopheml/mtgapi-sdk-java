@@ -1,6 +1,7 @@
 package com.github.christopheml.mtgapi.http;
 
-import com.github.christopheml.mtgapi.ApiResponse;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.github.christopheml.mtgapi.responses.ApiResponse;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,11 +26,25 @@ public class JsonHttpClientTest {
             .withBody("{\"name\": \"Angus\", \"count\": 1471, \"flags\": [false, true, true]}")
         ));
 
-        ApiResponse<SampleEntity> response = httpClient.get("http://localhost:8401/entities/sample", SampleEntity.class);
+        SampleResponse response = (SampleResponse) httpClient.get("http://localhost:8401/entities/sample", SampleResponse.class);
         SampleEntity entity = response.getEntity();
         assertThat(entity.getName()).isEqualTo("Angus");
         assertThat(entity.getCount()).isEqualTo(1471);
         assertThat(entity.getFlags()).containsExactly(false, true, true);
+    }
+
+    private static final class SampleResponse extends ApiResponse {
+
+        private final SampleEntity entity;
+
+        @JsonCreator
+        public SampleResponse(SampleEntity entity) {
+            this.entity = entity;
+        }
+
+        public SampleEntity getEntity() {
+            return entity;
+        }
     }
 
     private static final class SampleEntity {
