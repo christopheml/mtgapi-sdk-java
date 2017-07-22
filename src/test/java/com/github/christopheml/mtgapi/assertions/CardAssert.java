@@ -1,11 +1,15 @@
 package com.github.christopheml.mtgapi.assertions;
 
 import com.github.christopheml.mtgapi.entities.Card;
+import com.github.christopheml.mtgapi.entities.Color;
 import org.assertj.core.api.AbstractAssert;
+import org.assertj.core.internal.Iterables;
 
 import java.util.Objects;
 
 public final class CardAssert extends AbstractAssert<CardAssert, Card> {
+
+    private static final Iterables iterables = Iterables.instance();
 
     private CardAssert(Card actual) {
         super(actual, CardAssert.class);
@@ -141,6 +145,22 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         if (!Objects.equals(actual.getId(), id)) {
             failWithMessage("Expected card's id to be <%s> but was <%s>", id, actual.getId());
         }
+
+        return this;
+    }
+
+    public CardAssert hasColorIdentity(Color... colors) {
+        isNotNull();
+
+        iterables.assertContainsExactlyInAnyOrder(info, actual.getColorIdentity(), colors);
+
+        return this;
+    }
+
+    public CardAssert hasExactColors(Color... colors) {
+        isNotNull();
+
+        iterables.assertContainsExactlyInAnyOrder(info, actual.getColors(), colors);
 
         return this;
     }

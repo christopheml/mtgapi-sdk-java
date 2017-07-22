@@ -2,6 +2,8 @@ package com.github.christopheml.mtgapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Set;
+
 /**
  * Represents a Magic Card.
  */
@@ -13,6 +15,10 @@ public class Card {
     private String manaCost;
 
     private int cmc;
+
+    private Set<Color> colors;
+
+    private Set<Color> colorIdentity;
 
     private String type;
 
@@ -138,5 +144,21 @@ public class Card {
         this.id = id;
     }
 
+
+    public Set<Color> getColors() {
+        return colors;
+    }
+
+    public void setColors(Set<Color> colors) {
+        this.colors = colors;
+    }
+
+    public Set<Color> getColorIdentity() {
+        return colorIdentity;
+    }
+
+    public void setColorIdentity(Set<Color> colorIdentity) {
+        this.colorIdentity = colorIdentity;
+    }
 
 }

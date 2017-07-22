@@ -2,6 +2,7 @@ package com.github.christopheml.mtgapi;
 
 import com.github.christopheml.mtgapi.assertions.CardAssert;
 import com.github.christopheml.mtgapi.entities.Card;
+import com.github.christopheml.mtgapi.entities.Color;
 import com.github.christopheml.mtgapi.http.JsonHttpClient;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
@@ -30,6 +31,8 @@ public class CardApiTest {
                 .hasName("Narset, Enlightened Master")
                 .hasManaCost("{3}{U}{R}{W}")
                 .hasCmc(6)
+                .hasExactColors(Color.BLUE, Color.RED, Color.WHITE)
+                .hasColorIdentity(Color.BLUE, Color.RED, Color.WHITE)
                 .hasExactType("Legendary Creature — Human Monk")
                 .hasText("First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.")
                 .hasArtist("Magali Villeneuve")
