@@ -22,6 +22,12 @@ public class Card {
 
     private String type;
 
+    private Set<String> supertypes;
+
+    private Set<String> types;
+
+    private Set<String> subtypes;
+
     private Rarity rarity;
 
     private String text;
@@ -169,6 +175,30 @@ public class Card {
 
     public void setRarity(Rarity rarity) {
         this.rarity = rarity;
+    }
+
+    public Set<String> getSupertypes() {
+        return supertypes;
+    }
+
+    public void setSupertypes(Set<String> supertypes) {
+        this.supertypes = supertypes;
+    }
+
+    public Set<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(Set<String> types) {
+        this.types = types;
+    }
+
+    public Set<String> getSubtypes() {
+        return subtypes;
+    }
+
+    public void setSubtypes(Set<String> subtypes) {
+        this.subtypes = subtypes;
     }
 
 }

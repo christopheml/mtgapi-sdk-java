@@ -176,4 +176,28 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         return this;
     }
 
+    public CardAssert hasExactSupertypes(String... supertypes) {
+        isNotNull();
+
+        iterables.assertContainsExactlyInAnyOrder(info, actual.getSupertypes(), supertypes);
+
+        return this;
+    }
+
+    public CardAssert hasExactTypes(String... types) {
+        isNotNull();
+
+        iterables.assertContainsExactlyInAnyOrder(info, actual.getTypes(), types);
+
+        return this;
+    }
+
+    public CardAssert hasExactSubtypes(String... subtypes) {
+        isNotNull();
+
+        iterables.assertContainsExactlyInAnyOrder(info, actual.getSubtypes(), subtypes);
+
+        return this;
+    }
+
 }
