@@ -1,6 +1,7 @@
 package com.github.christopheml.mtgapi.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.christopheml.mtgapi.ApiResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -32,14 +33,14 @@ public final class JsonHttpClient {
      * @return A object of the given class representing the entity in the HTTP response
      * @throws IOException when the HTTP request fails
      */
-    public <T> T get(String path, Class<T> objectClass) throws IOException {
+    public <T> ApiResponse<T> get(String path, Class<T> objectClass) throws IOException {
         HttpGet request = new HttpGet(path);
 
         logger.info("HTTP GET request to {}", path);
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             // TODO Handle rate related header
             HttpEntity entity = response.getEntity();
-            return objectMapper.readValue(entity.getContent(), objectClass);
+            return new ApiResponse<>(objectMapper.readValue(entity.getContent(), objectClass));
         }
     }
 
