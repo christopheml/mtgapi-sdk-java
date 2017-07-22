@@ -38,4 +38,9 @@ public enum Color {
                 .orElseThrow(() -> new UnknownEntityException(representation));
     }
 
+    @Override
+    public String toString() {
+        return canonicalName;
+    }
+
 }

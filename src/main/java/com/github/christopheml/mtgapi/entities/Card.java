@@ -22,6 +22,8 @@ public class Card {
 
     private String type;
 
+    private Rarity rarity;
+
     private String text;
 
     private String artist;
@@ -159,6 +161,14 @@ public class Card {
 
     public void setColorIdentity(Set<Color> colorIdentity) {
         this.colorIdentity = colorIdentity;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
     }
 
 }

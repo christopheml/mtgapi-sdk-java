@@ -2,6 +2,7 @@ package com.github.christopheml.mtgapi.assertions;
 
 import com.github.christopheml.mtgapi.entities.Card;
 import com.github.christopheml.mtgapi.entities.Color;
+import com.github.christopheml.mtgapi.entities.Rarity;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.internal.Iterables;
 
@@ -161,6 +162,16 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         isNotNull();
 
         iterables.assertContainsExactlyInAnyOrder(info, actual.getColors(), colors);
+
+        return this;
+    }
+
+    public CardAssert hasRarity(Rarity rarity) {
+        isNotNull();
+
+        if (actual.getRarity() != rarity) {
+            failWithMessage("Expected card's rarity id to be <%s> but was <%s>", rarity, actual.getRarity());
+        }
 
         return this;
     }
