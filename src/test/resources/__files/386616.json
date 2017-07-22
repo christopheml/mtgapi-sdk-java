@@ -1,0 +1,153 @@
+{
+  "card": {
+    "name": "Narset, Enlightened Master",
+    "manaCost": "{3}{U}{R}{W}",
+    "cmc": 6,
+    "colors": [
+      "White",
+      "Blue",
+      "Red"
+    ],
+    "colorIdentity": [
+      "W",
+      "U",
+      "R"
+    ],
+    "type": "Legendary Creature — Human Monk",
+    "supertypes": [
+      "Legendary"
+    ],
+    "types": [
+      "Creature"
+    ],
+    "subtypes": [
+      "Human",
+      "Monk"
+    ],
+    "rarity": "Mythic Rare",
+    "set": "KTK",
+    "setName": "Khans of Tarkir",
+    "text": "First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.",
+    "artist": "Magali Villeneuve",
+    "number": "190",
+    "power": "3",
+    "toughness": "2",
+    "layout": "normal",
+    "multiverseid": 386616,
+    "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=386616&type=card",
+    "watermark": "Jeskai",
+    "rulings": [
+      {
+        "date": "2014-09-20",
+        "text": "The cards are exiled face up. Casting the noncreature cards exiled this way follows the normal rules for casting those cards. You must follow all applicable timing rules. For example, if one of the exiled cards is a sorcery card, you can cast it only during your main phase while the stack is empty."
+      },
+      {
+        "date": "2014-09-20",
+        "text": "You can't play any land cards exiled with Narset."
+      },
+      {
+        "date": "2014-09-20",
+        "text": "Because you're already casting the card using an alternative cost (by casting it without paying its mana cost), you can't pay any other alternative costs for the card, including casting it face down using the morph ability. You can pay additional costs, such as kicker costs. If the card has any mandatory additional costs, you must pay those."
+      },
+      {
+        "date": "2014-09-20",
+        "text": "If the card has {X} in its mana cost, you must choose 0 as the value for X when casting it."
+      },
+      {
+        "date": "2014-09-20",
+        "text": "Any exiled cards you don't cast remain in exile."
+      }
+    ],
+    "foreignNames": [
+      {
+        "name": "悟道大师娜尔施",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=386885&type=card",
+        "language": "Chinese Simplified",
+        "multiverseid": 386885
+      },
+      {
+        "name": "悟道大師娜爾施",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=387154&type=card",
+        "language": "Chinese Traditional",
+        "multiverseid": 387154
+      },
+      {
+        "name": "Narset, maîtresse éclairée",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=387692&type=card",
+        "language": "French",
+        "multiverseid": 387692
+      },
+      {
+        "name": "Narset, Erleuchtete Meisterin",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=387423&type=card",
+        "language": "German",
+        "multiverseid": 387423
+      },
+      {
+        "name": "Narset, Maestra Illuminata",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=387961&type=card",
+        "language": "Italian",
+        "multiverseid": 387961
+      },
+      {
+        "name": "悟った達人、ナーセット",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=388230&type=card",
+        "language": "Japanese",
+        "multiverseid": 388230
+      },
+      {
+        "name": "깨달음을 얻은 대가 나르셋",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=388499&type=card",
+        "language": "Korean",
+        "multiverseid": 388499
+      },
+      {
+        "name": "Narset, Mestra Iluminada",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=388768&type=card",
+        "language": "Portuguese (Brazil)",
+        "multiverseid": 388768
+      },
+      {
+        "name": "Нарсет, Просветленная Наставница",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=389037&type=card",
+        "language": "Russian",
+        "multiverseid": 389037
+      },
+      {
+        "name": "Narset, maestra iluminada",
+        "imageUrl": "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=389306&type=card",
+        "language": "Spanish",
+        "multiverseid": 389306
+      }
+    ],
+    "printings": [
+      "pPRE",
+      "KTK"
+    ],
+    "originalText": "First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.",
+    "originalType": "Legendary Creature — Human Monk",
+    "legalities": [
+      {
+        "format": "Commander",
+        "legality": "Legal"
+      },
+      {
+        "format": "Khans of Tarkir Block",
+        "legality": "Legal"
+      },
+      {
+        "format": "Legacy",
+        "legality": "Legal"
+      },
+      {
+        "format": "Modern",
+        "legality": "Legal"
+      },
+      {
+        "format": "Vintage",
+        "legality": "Legal"
+      }
+    ],
+    "id": "2a9bdc9658a08072fa90c602c045eb6a0d94e083"
+  }
+}
