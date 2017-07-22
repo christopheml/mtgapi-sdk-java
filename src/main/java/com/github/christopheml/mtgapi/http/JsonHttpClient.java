@@ -1,6 +1,7 @@
 package com.github.christopheml.mtgapi.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.christopheml.mtgapi.responses.ApiResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -45,7 +46,9 @@ public final class JsonHttpClient {
     }
 
     public static JsonHttpClient defaultInstance() {
-        return new JsonHttpClient(HttpClients.createDefault(), new ObjectMapper());
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        return new JsonHttpClient(HttpClients.createDefault(), objectMapper);
     }
 
 }
