@@ -2,6 +2,7 @@ package com.github.christopheml.mtgapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -47,6 +48,8 @@ public class Card {
     private String originalType;
 
     private String id;
+
+    private List<Ruling> rulings;
 
     public String getName() {
         return name;
@@ -199,6 +202,14 @@ public class Card {
 
     public void setSubtypes(Set<String> subtypes) {
         this.subtypes = subtypes;
+    }
+
+    public List<Ruling> getRulings() {
+        return rulings;
+    }
+
+    public void setRulings(List<Ruling> rulings) {
+        this.rulings = rulings;
     }
 
 }

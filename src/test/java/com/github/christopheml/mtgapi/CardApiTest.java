@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CardApiTest {
 
@@ -48,6 +49,8 @@ public class CardApiTest {
                 .hasOriginalText("First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.")
                 .hasOriginalType("Legendary Creature — Human Monk")
                 .hasId("2a9bdc9658a08072fa90c602c045eb6a0d94e083");
+
+        assertThat(card.getRulings()).hasSize(5);
     }
 
 }
