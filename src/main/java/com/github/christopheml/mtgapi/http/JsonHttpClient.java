@@ -6,10 +6,14 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public final class JsonHttpClient {
+
+    private static final Logger logger = LoggerFactory.getLogger(JsonHttpClient.class);
 
     private final CloseableHttpClient httpClient;
 
@@ -30,6 +34,8 @@ public final class JsonHttpClient {
      */
     public <T> T get(String path, Class<T> objectClass) throws IOException {
         HttpGet request = new HttpGet(path);
+
+        logger.info("HTTP GET request to {}", path);
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             // TODO Handle rate related header
             HttpEntity entity = response.getEntity();
