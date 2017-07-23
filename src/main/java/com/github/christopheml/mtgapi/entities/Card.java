@@ -65,6 +65,8 @@ public class Card {
 
     private Set<String> printings;
 
+    private Set<FormatLegality> legalities;
+
     public String getName() {
         return name;
     }
@@ -281,4 +283,13 @@ public class Card {
     public void setPrintings(Set<String> printings) {
         this.printings = printings;
     }
+
+    public Set<FormatLegality> getLegalities() {
+        return legalities;
+    }
+
+    public void setLegalities(Set<FormatLegality> legalities) {
+        this.legalities = legalities;
+    }
+
 }
