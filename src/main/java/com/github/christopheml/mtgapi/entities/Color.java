@@ -35,7 +35,7 @@ public enum Color {
         return Arrays.stream(values())
                 .filter(color -> color.isRepresentedBy(representation))
                 .findFirst()
-                .orElseThrow(() -> new UnknownEntityException(representation));
+                .orElseThrow(() -> new UnknownEntityException(Color.class, representation));
     }
 
     @Override

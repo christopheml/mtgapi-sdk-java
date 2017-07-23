@@ -5,8 +5,8 @@ package com.github.christopheml.mtgapi.entities;
  */
 public class UnknownEntityException extends RuntimeException {
 
-    public UnknownEntityException(String entity) {
-        super(String.format("The entity <%s> is unknown, your mtgapi-sdk-java version may be out of date", entity));
+    public UnknownEntityException(Class<?> expectedClass, String entity) {
+        super(String.format("The entity <%s> is unknown for type <%s>, your mtgapi-sdk-java version may be out of date", entity, expectedClass.getSimpleName()));
     }
 
 }

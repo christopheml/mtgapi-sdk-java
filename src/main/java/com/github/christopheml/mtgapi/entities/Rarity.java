@@ -30,7 +30,7 @@ public enum Rarity {
         return Arrays.stream(values())
                 .filter(rarity -> Objects.equals(rarity.canonicalName, representation))
                 .findFirst()
-                .orElseThrow(() -> new UnknownEntityException(representation));
+                .orElseThrow(() -> new UnknownEntityException(Rarity.class, representation));
     }
 
     @Override
