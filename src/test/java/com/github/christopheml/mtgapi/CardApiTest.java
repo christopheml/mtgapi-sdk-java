@@ -3,6 +3,7 @@ package com.github.christopheml.mtgapi;
 import com.github.christopheml.mtgapi.assertions.CardAssert;
 import com.github.christopheml.mtgapi.entities.Card;
 import com.github.christopheml.mtgapi.entities.Color;
+import com.github.christopheml.mtgapi.entities.Layout;
 import com.github.christopheml.mtgapi.entities.Rarity;
 import com.github.christopheml.mtgapi.http.JsonHttpClient;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
@@ -40,10 +41,15 @@ public class CardApiTest {
                 .hasExactTypes("Creature")
                 .hasExactSubtypes("Human", "Monk")
                 .hasRarity(Rarity.MYTHIC_RARE)
+                .hasPower(3)
+                .hasThougness(2)
                 .hasText("First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.")
                 .hasArtist("Magali Villeneuve")
                 .hasMultiverseId(386616)
+                .hasSet("KTK")
+                .hasSetName("Khans of Tarkir")
                 .hasNumber("190")
+                .hasLayout(Layout.NORMAL)
                 .hasImageUrl("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=386616&type=card")
                 .hasWatermark("Jeskai")
                 .hasOriginalText("First strike, hexproof\nWhenever Narset, Enlightened Master attacks, exile the top four cards of your library. Until end of turn, you may cast noncreature cards exiled with Narset this turn without paying their mana costs.")

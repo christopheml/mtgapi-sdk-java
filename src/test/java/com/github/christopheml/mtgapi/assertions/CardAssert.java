@@ -1,9 +1,6 @@
 package com.github.christopheml.mtgapi.assertions;
 
-import com.github.christopheml.mtgapi.entities.Card;
-import com.github.christopheml.mtgapi.entities.Color;
-import com.github.christopheml.mtgapi.entities.ForeignName;
-import com.github.christopheml.mtgapi.entities.Rarity;
+import com.github.christopheml.mtgapi.entities.*;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.internal.Iterables;
 
@@ -47,7 +44,7 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         isNotNull();
 
         if (actual.getCmc() != cmc) {
-            failWithMessage("Expected card's converted mana cost to be <%s> but was <%s>", cmc, actual.getCmc());
+            failWithMessage("Expected card's converted mana cost to be <%d> but was <%d>", cmc, actual.getCmc());
         }
 
         return this;
@@ -87,7 +84,7 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         isNotNull();
 
         if (actual.getMultiverseid() != multiverseId) {
-            failWithMessage("Expected card's multiverse id to be <%s> but was <%s>", multiverseId, actual.getMultiverseid());
+            failWithMessage("Expected card's multiverse id to be <%d> but was <%d>", multiverseId, actual.getMultiverseid());
         }
 
         return this;
@@ -209,6 +206,56 @@ public final class CardAssert extends AbstractAssert<CardAssert, Card> {
         Set<String> actualLanguages = actual.getForeignNames().stream().map(ForeignName::getLanguage).collect(Collectors.toSet());
 
         iterables.assertContainsExactlyInAnyOrder(info, actualLanguages, languages);
+
+        return this;
+    }
+
+    public CardAssert hasPower(int power) {
+        isNotNull();
+
+        if (actual.getPower() != power) {
+            failWithMessage("Expected card's power to be <%d> but was <%d>", power, actual.getPower());
+        }
+
+        return this;
+    }
+
+    public CardAssert hasThougness(int toughness) {
+        isNotNull();
+
+        if (actual.getToughness() != toughness) {
+            failWithMessage("Expected card's toughness to be <%d> but was <%d>", toughness, actual.getToughness());
+        }
+
+        return this;
+    }
+
+    public CardAssert hasSet(String set) {
+        isNotNull();
+
+        if (!Objects.equals(actual.getSet(), set)) {
+            failWithMessage("Expected card's set to be <%s> but was <%s>", set, actual.getSet());
+        }
+
+        return this;
+    }
+
+    public CardAssert hasSetName(String setName) {
+        isNotNull();
+
+        if (!Objects.equals(actual.getSetName(), setName)) {
+            failWithMessage("Expected card's setName to be <%s> but was <%s>", setName, actual.getSetName());
+        }
+
+        return this;
+    }
+
+    public CardAssert hasLayout(Layout layout) {
+        isNotNull();
+
+        if (actual.getLayout() != layout) {
+            failWithMessage("Expected card's layout to be <%s> but was <%s>", layout, actual.getLayout());
+        }
 
         return this;
     }

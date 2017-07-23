@@ -29,7 +29,17 @@ public class Card {
 
     private Set<String> subtypes;
 
+    private Integer power;
+
+    private Integer toughness;
+
     private Rarity rarity;
+
+    private String set;
+
+    private String setName;
+
+    private Layout layout;
 
     private String text;
 
@@ -52,6 +62,8 @@ public class Card {
     private List<Ruling> rulings;
 
     private Set<ForeignName> foreignNames;
+
+    private Set<String> printings;
 
     public String getName() {
         return name;
@@ -220,5 +232,53 @@ public class Card {
 
     public void setForeignNames(Set<ForeignName> foreignNames) {
         this.foreignNames = foreignNames;
+    }
+
+    public String getSetName() {
+        return setName;
+    }
+
+    public void setSetName(String setName) {
+        this.setName = setName;
+    }
+
+    public String getSet() {
+        return set;
+    }
+
+    public void setSet(String set) {
+        this.set = set;
+    }
+
+    public Integer getPower() {
+        return power;
+    }
+
+    public void setPower(Integer power) {
+        this.power = power;
+    }
+
+    public Integer getToughness() {
+        return toughness;
+    }
+
+    public void setToughness(Integer toughness) {
+        this.toughness = toughness;
+    }
+
+    public Layout getLayout() {
+        return layout;
+    }
+
+    public void setLayout(Layout layout) {
+        this.layout = layout;
+    }
+
+    public Set<String> getPrintings() {
+        return printings;
+    }
+
+    public void setPrintings(Set<String> printings) {
+        this.printings = printings;
     }
 }
