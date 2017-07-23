@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.christopheml.mtgapi.responses.ApiResponse;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,20 +30,29 @@ public final class JsonHttpClient {
     /**
      * Queries an URL to retrieve a single entity in JSON form and binds it to an object.
      * @param path URL to query
-     * @param objectClass Concrete class of the object to map to
+     * @param responseClass Concrete class of the object to map to
      * @return A object of the given class representing the entity in the HTTP response
      */
-    public ApiResponse get(String path, Class<? extends ApiResponse> objectClass) {
+    public ApiResponse get(String path, Class<? extends ApiResponse> responseClass) {
         HttpGet request = new HttpGet(path);
 
         logger.info("HTTP GET request to {}", path);
         try (CloseableHttpResponse response = httpClient.execute(request)) {
-            // TODO Handle rate related header
-            HttpEntity entity = response.getEntity();
-            return objectMapper.readValue(entity.getContent(), objectClass);
+            return processApiResponse(responseClass, response);
         } catch (IOException e) {
             throw new HttpRequestFailedException(e);
         }
+    }
+
+    private ApiResponse processApiResponse(Class<? extends ApiResponse> responseClass, HttpResponse response) throws IOException {
+        HttpEntity entity = response.getEntity();
+        ApiResponse apiResponse = objectMapper.readValue(entity.getContent(), responseClass);
+        apiResponse.setCount(response);
+        apiResponse.setPageSize(response);
+        apiResponse.setTotalCount(response);
+        apiResponse.setRatelimitRemaining(response);
+        apiResponse.setLinks(response);
+        return apiResponse;
     }
 
     public static JsonHttpClient defaultInstance() {
