@@ -27,7 +27,7 @@ public class CardApiTest {
                 .withBodyFile("386616.json")
         ));
 
-        Card card = cardApi.singleCard(386616);
+        Card card = cardApi.findOne(386616);
 
         CardAssert.assertThat(card)
                 .hasName("Narset, Enlightened Master")

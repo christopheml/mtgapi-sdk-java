@@ -1,6 +1,8 @@
 package com.github.christopheml.mtgapi.http;
 
 import com.github.christopheml.mtgapi.json.JsonDeserializer;
+import com.github.christopheml.mtgapi.responses.ApiResponse;
+import com.github.christopheml.mtgapi.responses.ListResponse;
 import com.github.christopheml.mtgapi.responses.SingleResponse;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -10,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public final class HttpClient {
@@ -44,6 +48,23 @@ public final class HttpClient {
         return singleResponse;
     }
 
+    public <ENTITY, T extends ListResponse<ENTITY>> T list(String path, Supplier<T> responseSupplier) {
+        logger.info("HTTP GET request for multiple entities to {}", path);
+        T listResponse = responseSupplier.get();
+
+        List<ENTITY> entities = new ArrayList<>();
+
+        do {
+            doRequest(path, httpResponse -> {
+                processHeaders(listResponse, httpResponse);
+                entities.addAll(jsonDeserializer.deserialize(httpResponse.getEntity().getContent(), listResponse));
+            });
+        } while (listResponse.hasNext());
+
+        listResponse.setEntities(entities);
+        return listResponse;
+    }
+
     private void doRequest(String path, ResponseHandler responseHandler) {
         HttpGet request = new HttpGet(path);
 
@@ -54,7 +75,7 @@ public final class HttpClient {
         }
     }
 
-    private <ENTITY, T extends SingleResponse<ENTITY>> void processHeaders(T singleResponse, HttpResponse response) {
+    private <ENTITY, T extends ApiResponse<ENTITY>> void processHeaders(T singleResponse, HttpResponse response) {
         singleResponse.setCount(response);
         singleResponse.setPageSize(response);
         singleResponse.setTotalCount(response);

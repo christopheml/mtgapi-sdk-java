@@ -21,11 +21,12 @@ public abstract class ApiResponse<ENTITY> {
 
     private Integer ratelimitRemaining;
 
-    private final Map<String, String> links = new HashMap<>();
+    private Map<String, String> links;
 
     public void setLinks(HttpResponse response) {
         Header linksHeader = response.getFirstHeader("Link");
         if (linksHeader != null) {
+            links = new HashMap<>();
             String rawLinks = linksHeader.getValue();
             Matcher matcher = LINK_PATTERN.matcher(rawLinks);
             while (matcher.find()) {
@@ -80,6 +81,10 @@ public abstract class ApiResponse<ENTITY> {
 
     public Optional<String> getLink(String rel) {
         return Optional.ofNullable(links.get(rel));
+    }
+
+    public boolean hasNext() {
+        return links != null && links.containsKey("next");
     }
 
     public abstract Class<ENTITY> getEntityClass();
