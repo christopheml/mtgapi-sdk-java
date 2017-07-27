@@ -7,7 +7,6 @@ import com.github.christopheml.mtgapi.responses.SingleResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 public class JsonDeserializer {
 
@@ -17,21 +16,16 @@ public class JsonDeserializer {
         this.objectMapper = objectMapper;
     }
 
-    public <ENTITY, T extends SingleResponse<ENTITY>> T deserialize(InputStream json, Supplier<T> responseSupplier) {
-        T singleResponse = responseSupplier.get();
-
+    public <ENTITY, T extends SingleResponse<ENTITY>> ENTITY deserialize(InputStream json, T singleResponse) {
         try {
             JsonNode root = objectMapper.readTree(json);
             JsonNode entityRoot = Optional
                     .ofNullable(root.findValue(singleResponse.getEntityRoot()))
                     .orElseThrow(() -> new MalformedJsonResponseException(String.format("Can't find root element %s in response", singleResponse.getEntityRoot())));
-            ENTITY entity = objectMapper.treeToValue(entityRoot, singleResponse.getEntityClass());
-            singleResponse.setEntity(entity);
-            return singleResponse;
+            return objectMapper.treeToValue(entityRoot, singleResponse.getEntityClass());
         } catch (IOException e) {
             throw new MalformedJsonResponseException(e);
         }
     }
-
 
 }

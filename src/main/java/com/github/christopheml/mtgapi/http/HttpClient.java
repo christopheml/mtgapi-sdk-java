@@ -2,7 +2,6 @@ package com.github.christopheml.mtgapi.http;
 
 import com.github.christopheml.mtgapi.json.JsonDeserializer;
 import com.github.christopheml.mtgapi.responses.SingleResponse;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -36,22 +35,23 @@ public final class HttpClient {
         HttpGet request = new HttpGet(path);
 
         logger.info("HTTP GET request to {}", path);
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            return processApiResponse(responseSupplier, response);
+        try (CloseableHttpResponse httpResponse = httpClient.execute(request)) {
+            T singleResponse = responseSupplier.get();
+            processHeaders(singleResponse, httpResponse);
+            ENTITY entity = jsonDeserializer.deserialize(httpResponse.getEntity().getContent(), singleResponse);
+            singleResponse.setEntity(entity);
+            return singleResponse;
         } catch (IOException e) {
             throw new HttpRequestFailedException(e);
         }
     }
 
-    private <ENTITY, T extends SingleResponse<ENTITY>> T processApiResponse(Supplier<T> responseSupplier, HttpResponse response) throws IOException {
-        HttpEntity entity = response.getEntity();
-        T apiResponse = jsonDeserializer.deserialize(entity.getContent(), responseSupplier);
-        apiResponse.setCount(response);
-        apiResponse.setPageSize(response);
-        apiResponse.setTotalCount(response);
-        apiResponse.setRatelimitRemaining(response);
-        apiResponse.setLinks(response);
-        return apiResponse;
+    private <ENTITY, T extends SingleResponse<ENTITY>> void processHeaders(T singleResponse, HttpResponse response) throws IOException {
+        singleResponse.setCount(response);
+        singleResponse.setPageSize(response);
+        singleResponse.setTotalCount(response);
+        singleResponse.setRatelimitRemaining(response);
+        singleResponse.setLinks(response);
     }
 
 }
