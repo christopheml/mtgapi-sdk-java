@@ -32,21 +32,29 @@ public final class HttpClient {
      * @return A object of the given class representing the entity in the HTTP response
      */
     public <ENTITY, T extends SingleResponse<ENTITY>> T get(String path, Supplier<T> responseSupplier) {
-        HttpGet request = new HttpGet(path);
+        logger.info("HTTP GET request for single entity to {}", path);
+        T singleResponse = responseSupplier.get();
 
-        logger.info("HTTP GET request to {}", path);
-        try (CloseableHttpResponse httpResponse = httpClient.execute(request)) {
-            T singleResponse = responseSupplier.get();
+        doRequest(path, httpResponse -> {
             processHeaders(singleResponse, httpResponse);
             ENTITY entity = jsonDeserializer.deserialize(httpResponse.getEntity().getContent(), singleResponse);
             singleResponse.setEntity(entity);
-            return singleResponse;
+        });
+
+        return singleResponse;
+    }
+
+    private void doRequest(String path, ResponseHandler responseHandler) {
+        HttpGet request = new HttpGet(path);
+
+        try (CloseableHttpResponse httpResponse = httpClient.execute(request)) {
+            responseHandler.apply(httpResponse);
         } catch (IOException e) {
             throw new HttpRequestFailedException(e);
         }
     }
 
-    private <ENTITY, T extends SingleResponse<ENTITY>> void processHeaders(T singleResponse, HttpResponse response) throws IOException {
+    private <ENTITY, T extends SingleResponse<ENTITY>> void processHeaders(T singleResponse, HttpResponse response) {
         singleResponse.setCount(response);
         singleResponse.setPageSize(response);
         singleResponse.setTotalCount(response);
