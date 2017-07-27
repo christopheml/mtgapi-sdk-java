@@ -12,7 +12,7 @@ public class ApiResponseTest {
     @Test
     public void should_read_page_size_header()  {
         HttpResponse httpResponse = responseWithHeader("Page-Size", "100");
-        ApiResponse apiResponse = new SampleResponse();
+        ApiResponse<Object> apiResponse = new SampleResponse();
 
         apiResponse.setPageSize(httpResponse);
 
@@ -22,7 +22,7 @@ public class ApiResponseTest {
     @Test
     public void should_read_total_count_header()  {
         HttpResponse httpResponse = responseWithHeader("Total-Count", "2877");
-        ApiResponse apiResponse = new SampleResponse();
+        ApiResponse<Object> apiResponse = new SampleResponse();
 
         apiResponse.setTotalCount(httpResponse);
 
@@ -32,7 +32,7 @@ public class ApiResponseTest {
     @Test
     public void should_read_count_header() {
         HttpResponse httpResponse = responseWithHeader("Count", "98");
-        ApiResponse apiResponse = new SampleResponse();
+        ApiResponse<Object> apiResponse = new SampleResponse();
 
         apiResponse.setCount(httpResponse);
 
@@ -42,7 +42,7 @@ public class ApiResponseTest {
     @Test
     public void should_read_ratelimit_remaining_header()  {
         HttpResponse httpResponse = responseWithHeader("Ratelimit-Remaining", "4788");
-        ApiResponse apiResponse = new SampleResponse();
+        ApiResponse<Object> apiResponse = new SampleResponse();
 
         apiResponse.setRatelimitRemaining(httpResponse);
 
@@ -53,7 +53,7 @@ public class ApiResponseTest {
     public void should_read_links_header() throws Exception {
         HttpResponse httpResponse = responseWithHeader("Link",
                 "<http://api.magicthegathering.io/v1/cards?page=311>; rel=\"last\", <http://api.magicthegathering.io/v1/cards?page=2>; rel=\"next\"");
-        ApiResponse apiResponse = new SampleResponse();
+        ApiResponse<Object> apiResponse = new SampleResponse();
 
         apiResponse.setLinks(httpResponse);
 
@@ -68,7 +68,16 @@ public class ApiResponseTest {
         return response;
     }
 
-    private static final class SampleResponse extends ApiResponse {
+    private static final class SampleResponse extends SingleResponse<Object> {
+        @Override
+        public Class<Object> getEntityClass() {
+            return Object.class;
+        }
+
+        @Override
+        public String getEntityRoot() {
+            return "";
+        }
     }
 
 }

@@ -5,7 +5,6 @@ import com.github.christopheml.mtgapi.entities.Card;
 import com.github.christopheml.mtgapi.entities.Color;
 import com.github.christopheml.mtgapi.entities.Layout;
 import com.github.christopheml.mtgapi.entities.Rarity;
-import com.github.christopheml.mtgapi.http.JsonHttpClient;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +18,7 @@ public class CardApiTest {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(options().port(8401));
 
-    private static final CardApi cardApi = new CardApi("http://localhost:8401/v1/cards", JsonHttpClient.defaultInstance());
+    private static final CardApi cardApi = new CardApi("http://localhost:8401/v1/cards", Application.httpClient());
 
     @Test
     public void fetch_one_card() throws Exception {

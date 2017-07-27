@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class ApiResponse {
+public abstract class ApiResponse<ENTITY> {
 
     private static final Pattern LINK_PATTERN = Pattern.compile("<([^>]+)>; rel=\"([^\"]+)\"");
 
@@ -81,5 +81,9 @@ public abstract class ApiResponse {
     public Optional<String> getLink(String rel) {
         return Optional.ofNullable(links.get(rel));
     }
+
+    public abstract Class<ENTITY> getEntityClass();
+
+    public abstract String getEntityRoot();
 
 }

@@ -1,20 +1,17 @@
 package com.github.christopheml.mtgapi.responses;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.christopheml.mtgapi.entities.Card;
 
-public class CardResponse extends ApiResponse {
+public class CardResponse extends SingleResponse<Card> {
 
-    private final Card card;
-
-    @JsonCreator
-    public CardResponse(@JsonProperty("card") Card card) {
-        this.card = card;
+    @Override
+    public Class<Card> getEntityClass() {
+        return Card.class;
     }
 
-    public Card getCard() {
-        return card;
+    @Override
+    public String getEntityRoot() {
+        return "card";
     }
 
 }
