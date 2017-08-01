@@ -21,7 +21,7 @@ public abstract class ApiResponse<ENTITY> {
 
     private Integer ratelimitRemaining;
 
-    private Map<String, String> links;
+    private Map<String, String> links = new HashMap<>();
 
     public void setLinks(HttpResponse response) {
         Header linksHeader = response.getFirstHeader("Link");

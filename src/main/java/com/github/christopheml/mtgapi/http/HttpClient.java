@@ -36,9 +36,9 @@ public final class HttpClient {
      * @return A object of the given class representing the entity in the HTTP response
      */
     public <ENTITY, T extends SingleResponse<ENTITY>> T get(String path, Supplier<T> responseSupplier) {
-        logger.info("HTTP GET request for single entity to {}", path);
         T singleResponse = responseSupplier.get();
 
+        logger.info("HTTP GET request for single entity to {}", path);
         doRequest(path, httpResponse -> {
             processHeaders(singleResponse, httpResponse);
             ENTITY entity = jsonDeserializer.deserialize(httpResponse.getEntity().getContent(), singleResponse);
@@ -49,13 +49,14 @@ public final class HttpClient {
     }
 
     public <ENTITY, T extends ListResponse<ENTITY>> T list(String path, Supplier<T> responseSupplier) {
-        logger.info("HTTP GET request for multiple entities to {}", path);
         T listResponse = responseSupplier.get();
 
         List<ENTITY> entities = new ArrayList<>();
 
         do {
-            doRequest(path, httpResponse -> {
+            String url = listResponse.getLink("next").orElse(path);
+            logger.info("HTTP GET request for multiple entities to {}", url);
+            doRequest(url, httpResponse -> {
                 processHeaders(listResponse, httpResponse);
                 entities.addAll(jsonDeserializer.deserialize(httpResponse.getEntity().getContent(), listResponse));
             });

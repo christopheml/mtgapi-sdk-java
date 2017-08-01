@@ -1,6 +1,7 @@
 package com.github.christopheml.mtgapi.http;
 
 import com.github.christopheml.mtgapi.Application;
+import com.github.christopheml.mtgapi.responses.ListResponse;
 import com.github.christopheml.mtgapi.responses.SingleResponse;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
@@ -22,6 +23,7 @@ public class HttpClientTest {
     @Test
     public void simple_get_to_entity() throws Exception {
         stubFor(get(urlEqualTo("/entities/sample")).willReturn(aResponse()
+            .withStatus(200)
             .withHeader("Content-Type", "application/json")
             .withBody("{\"sample\": {\"name\": \"Angus\", \"count\": 1471, \"flags\": [false, true, true]} }")
         ));
@@ -31,6 +33,31 @@ public class HttpClientTest {
         assertThat(entity.getName()).isEqualTo("Angus");
         assertThat(entity.getCount()).isEqualTo(1471);
         assertThat(entity.getFlags()).containsExactly(false, true, true);
+    }
+
+    @Test
+    public void three_pages_list() throws Exception {
+        stubFor(get(urlEqualTo("/entities/samples")).willReturn(aResponse()
+            .withStatus(200)
+            .withHeader("Link", "<http://localhost:8401/entities/samples>; rel=\"first\", <http://localhost:8401/entities/samples?page=3>; rel=\"last\", <http://localhost:8401/entities/samples?page=2>; rel=\"next\"")
+            .withBody("{\"samples\": [{\"sample\": {\"name\": \"Angus\", \"count\": 1471, \"flags\": [false, true, true]} }] }")
+        ));
+
+        stubFor(get(urlEqualTo("/entities/samples?page=2")).willReturn(aResponse()
+            .withStatus(200)
+            .withHeader("Link", "<http://localhost:8401/entities/samples>; rel=\"first\", <http://localhost:8401/entities/samples>; rel=\"prev\", <http://localhost:8401/entities/samples?page=3>; rel=\"last\", <http://localhost:8401/entities/samples?page=3>; rel=\"next\"")
+            .withBody("{\"samples\": [{\"sample\": {\"name\": \"Angus\", \"count\": 1471, \"flags\": [false, true, true]} }] }")
+        ));
+
+        stubFor(get(urlEqualTo("/entities/samples?page=3")).willReturn(aResponse()
+            .withStatus(200)
+            .withHeader("Link", "<http://localhost:8401/entities/samples>; rel=\"first\", <http://localhost:8401/entities/samples?page=2>; rel=\"prev\", <http://localhost:8401/entities/samples?page=3>; rel=\"last\"")
+            .withBody("{\"samples\": [{\"sample\": {\"name\": \"Angus\", \"count\": 1471, \"flags\": [false, true, true]} }] }")
+        ));
+
+        SampleListResponse response = httpClient.list("http://localhost:8401/entities/samples", SampleListResponse::new);
+        List<SampleEntity> entities = response.getEntities();
+        assertThat(entities).hasSize(3);
     }
 
     private static final class SampleResponse extends SingleResponse<SampleEntity> {
@@ -43,6 +70,19 @@ public class HttpClientTest {
         @Override
         public String getEntityRoot() {
             return "sample";
+        }
+    }
+
+    private static final class SampleListResponse extends ListResponse<SampleEntity> {
+
+        @Override
+        public Class<SampleEntity> getEntityClass() {
+            return SampleEntity.class;
+        }
+
+        @Override
+        public String getEntityRoot() {
+            return "samples";
         }
     }
 
