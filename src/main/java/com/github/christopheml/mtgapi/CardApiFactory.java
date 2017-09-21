@@ -10,24 +10,24 @@ import org.apache.http.impl.client.HttpClients;
 /**
  * Handles dependency instanciation and injection for the library.
  */
-public final class Application {
+public final class CardApiFactory {
 
-    private Application() {
+    private CardApiFactory() {
     }
 
-    public static ObjectMapper objectMapper() {
+    public static ObjectMapper objectMapper(CardApiOptions options) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;
     }
 
-    public static JsonDeserializer jsonDeserializer() {
-        return new JsonDeserializer(objectMapper());
+    public static JsonDeserializer jsonDeserializer(CardApiOptions options) {
+        return new JsonDeserializer(objectMapper(options));
     }
 
-    public static HttpClient httpClient() {
+    public static HttpClient httpClient(CardApiOptions options) {
         CloseableHttpClient closeableHttpClient = HttpClients.createSystem();
-        return new HttpClient(closeableHttpClient, jsonDeserializer());
+        return new HttpClient(closeableHttpClient, jsonDeserializer(options));
     }
 
 }

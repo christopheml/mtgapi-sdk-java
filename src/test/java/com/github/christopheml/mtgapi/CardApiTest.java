@@ -18,7 +18,7 @@ public class CardApiTest {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(options().port(8401));
 
-    private static final CardApi cardApi = new CardApi("http://localhost:8401/v1/cards", Application.httpClient());
+    private static final CardApi cardApi = new CardApi(CardApiOptions.options().withEndpoint("http://localhost:8401/v1/cards"));
 
     @Test
     public void fetch_one_card() throws Exception {

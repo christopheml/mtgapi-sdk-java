@@ -1,6 +1,7 @@
 package com.github.christopheml.mtgapi.http;
 
-import com.github.christopheml.mtgapi.Application;
+import com.github.christopheml.mtgapi.CardApiFactory;
+import com.github.christopheml.mtgapi.CardApiOptions;
 import com.github.christopheml.mtgapi.responses.ListResponse;
 import com.github.christopheml.mtgapi.responses.SingleResponse;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
@@ -18,7 +19,7 @@ public class HttpClientTest {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(options().port(8401));
 
-    private static final HttpClient httpClient = Application.httpClient();
+    private static final HttpClient httpClient = CardApiFactory.httpClient(CardApiOptions.options());
 
     @Test
     public void simple_get_to_entity() throws Exception {

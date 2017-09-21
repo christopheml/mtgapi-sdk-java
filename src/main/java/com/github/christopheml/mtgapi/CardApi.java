@@ -14,9 +14,13 @@ public class CardApi {
 
     private final HttpClient httpClient;
 
-    public CardApi(String endpoint, HttpClient httpClient) {
-        this.endpoint = endpoint;
-        this.httpClient = httpClient;
+    public CardApi() {
+        this(CardApiOptions.options());
+    }
+
+    public CardApi(CardApiOptions options) {
+        endpoint = options.getEndpoint();
+        httpClient = CardApiFactory.httpClient(options);
     }
 
     public Card findOne(long multiverseId) {
