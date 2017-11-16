@@ -3,8 +3,6 @@ package com.github.christopheml.mtgapi.requests;
 import com.github.christopheml.mtgapi.entities.Card;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -13,15 +11,15 @@ import java.util.function.Predicate;
 public interface CardMatcher {
 
     /**
-     * Provides the value of the API parameter for this predicate, if any.
+     * Provides the query parameters for the REST API.
+     * @return query parameters to append to the query.
      */
-    Optional<String> parameterValue();
+    Collection<CardQueryParameter> parameters();
 
     /**
-     * Provides the resultFilters applied to query results.
-     * @return resultFilters to apply to query results for this predicate.
+     * Provides the result filters applied to query results.
+     * @return result filters to apply to query results for this predicate.
      */
     Collection<Predicate<Card>> resultFilters();
 
-    void appendParameter(Map<String, String> parameters);
 }

@@ -3,9 +3,9 @@ package com.github.christopheml.mtgapi.requests;
 import com.github.christopheml.mtgapi.entities.Card;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
 import java.util.function.Predicate;
+
+import static java.util.Collections.singletonList;
 
 public class NameEqualsToMatcher extends NameMatcher {
 
@@ -16,13 +16,13 @@ public class NameEqualsToMatcher extends NameMatcher {
     }
 
     @Override
-    public Optional<String> parameterValue() {
-        return Optional.ofNullable(expectedName);
+    public Collection<CardQueryParameter> parameters() {
+        return singletonList(new CardQueryParameter("name", expectedName));
     }
 
     @Override
     public Collection<Predicate<Card>> resultFilters() {
-        return Collections.singletonList(card -> expectedName.equalsIgnoreCase(card.getName()));
+        return singletonList(card -> expectedName.equalsIgnoreCase(card.getName()));
     }
 
 }

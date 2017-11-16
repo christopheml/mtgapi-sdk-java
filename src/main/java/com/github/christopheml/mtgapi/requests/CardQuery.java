@@ -3,15 +3,13 @@ package com.github.christopheml.mtgapi.requests;
 import com.github.christopheml.mtgapi.entities.Card;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class CardQuery {
 
-    private final Map<String, String> parameters = new HashMap<>();
+    private final List<CardQueryParameter> parameters = new ArrayList<>();
 
     private final List<Predicate<Card>> resultFilters = new ArrayList<>();
 
@@ -29,8 +27,7 @@ public class CardQuery {
     }
 
     private void registerMatcher(CardMatcher matcher) {
-        // FIXME Perhaps avoid exposing internals here
-        matcher.appendParameter(parameters);
+        parameters.addAll(matcher.parameters());
         resultFilters.addAll(matcher.resultFilters());
     }
 
@@ -49,8 +46,8 @@ public class CardQuery {
      * @return a {@code String} representation of the URL that represents this query.
      */
     public String toUrl(String endpoint) {
-        String encodedParameters = parameters.entrySet().stream()
-                .map(p -> p.getKey() + "=" + p.getValue())
+        String encodedParameters = parameters.stream()
+                .map(p -> p.format("%s=%s"))
                 .reduce((p1, p2) -> p1 + "&" + p2)
                 .map(s -> "?" + s)
                 .orElse("");
