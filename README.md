@@ -2,7 +2,7 @@
 
 Unofficial Java SDK for using the magicthegathering.io APIs
 
-[![Build Status](https://travis-ci.org/christopheml/mtgapi-sdk-java.svg?branch=master)](https://travis-ci.org/christopheml/mtgapi-sdk-java)
+[![Build Status](https://travis-ci.org/christopheml/mtgapi-sdk-java.svg?branch=master)](https://travis-ci.org/christopheml/mtgapi-sdk-java) [![Sonar Quality Gate](https://sonarcloud.io/api/badges/gate?key=com.github.christopheml%3Amtgapi-sdk-java)](https://sonarcloud.io/dashboard?id=com.github.christopheml%3Amtgapi-sdk-java)
 
 This SDK aims to provide more advanced filters than those available with the API itself, by adding a filtering pass on the results returned by the API endpoint.
 
