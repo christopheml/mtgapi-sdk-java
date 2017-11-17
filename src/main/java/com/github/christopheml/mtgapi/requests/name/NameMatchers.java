@@ -1,4 +1,4 @@
-package com.github.christopheml.mtgapi.requests;
+package com.github.christopheml.mtgapi.requests.name;
 
 public final class NameMatchers {
 

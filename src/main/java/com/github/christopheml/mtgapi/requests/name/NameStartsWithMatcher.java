@@ -1,6 +1,7 @@
-package com.github.christopheml.mtgapi.requests;
+package com.github.christopheml.mtgapi.requests.name;
 
 import com.github.christopheml.mtgapi.entities.Card;
+import com.github.christopheml.mtgapi.requests.CardQueryParameter;
 
 import java.util.Collection;
 import java.util.function.Predicate;

@@ -3,13 +3,13 @@ package com.github.christopheml.mtgapi.requests;
 /**
  * Represents a parameter for the REST API.
  */
-class CardQueryParameter {
+public class CardQueryParameter {
 
     private final String name;
 
     private final String value;
 
-    CardQueryParameter(String name, String value) {
+    public CardQueryParameter(String name, String value) {
         this.name = name;
         this.value = value;
     }

@@ -1,12 +1,13 @@
-package com.github.christopheml.mtgapi.requests;
+package com.github.christopheml.mtgapi.requests.name;
 
 import com.github.christopheml.mtgapi.entities.Card;
+import com.github.christopheml.mtgapi.requests.CardQuery;
 import org.junit.Test;
 
 import java.util.List;
 
 import static com.github.christopheml.mtgapi.requests.CardQuery.query;
-import static com.github.christopheml.mtgapi.requests.NameMatchers.equalsTo;
+import static com.github.christopheml.mtgapi.requests.name.NameMatchers.equalsTo;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 

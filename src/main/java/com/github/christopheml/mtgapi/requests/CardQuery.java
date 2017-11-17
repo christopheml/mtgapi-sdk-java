@@ -1,6 +1,7 @@
 package com.github.christopheml.mtgapi.requests;
 
 import com.github.christopheml.mtgapi.entities.Card;
+import com.github.christopheml.mtgapi.requests.name.NameMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
