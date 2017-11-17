@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import static java.util.Collections.singletonList;
 
-public class NameStartsWithMatcher extends NameMatcher {
+public class NameStartsWithMatcher implements NameMatcher {
 
     private final String namePrefix;
 

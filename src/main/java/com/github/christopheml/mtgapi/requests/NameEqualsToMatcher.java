@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import static java.util.Collections.singletonList;
 
-public class NameEqualsToMatcher extends NameMatcher {
+public class NameEqualsToMatcher implements NameMatcher {
 
     private final String expectedName;
 

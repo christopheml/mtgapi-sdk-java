@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.github.christopheml.mtgapi.requests.CardQuery.query;
-import static com.github.christopheml.mtgapi.requests.NameMatcher.equalsTo;
+import static com.github.christopheml.mtgapi.requests.NameMatchers.equalsTo;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
