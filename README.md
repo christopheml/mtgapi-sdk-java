@@ -26,4 +26,5 @@ List<Cards> result = cardApi.find(query()
 
 * Card Name (case insensitive)
     * Exact match
+    * Contains text
     * Starting with a prefix
