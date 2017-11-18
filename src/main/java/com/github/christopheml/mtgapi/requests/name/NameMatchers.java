@@ -9,6 +9,10 @@ public final class NameMatchers {
         return new NameEqualsToMatcher(name);
     }
 
+    public static NameMatcher contains(String fragment) {
+        return new NameContainsMatcher(fragment);
+    }
+
     public static NameMatcher startsWith(String prefix) {
         return new NameStartsWithMatcher(prefix);
     }
