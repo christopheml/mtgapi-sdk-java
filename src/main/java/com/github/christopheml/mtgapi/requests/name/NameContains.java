@@ -6,7 +6,6 @@ import com.github.christopheml.mtgapi.requests.CardQueryParameter;
 import java.util.Collection;
 import java.util.function.Predicate;
 
-import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -26,8 +25,8 @@ public class NameContains implements NameMatcher {
     }
 
     @Override
-    public Collection<Predicate<Card>> resultFilters() {
-        return emptyList();
+    public Predicate<Card> resultFilter() {
+        return card -> true;
     }
 
 }

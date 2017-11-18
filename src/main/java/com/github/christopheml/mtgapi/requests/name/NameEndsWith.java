@@ -22,8 +22,8 @@ public class NameEndsWith implements NameMatcher {
     }
 
     @Override
-    public Collection<Predicate<Card>> resultFilters() {
-        return singletonList(card -> card.getName().toLowerCase().endsWith(suffix.toLowerCase()));
+    public Predicate<Card> resultFilter() {
+        return card -> card.getName().toLowerCase().endsWith(suffix.toLowerCase());
     }
 
 }

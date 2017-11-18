@@ -29,7 +29,7 @@ public class CardQuery {
 
     private void registerMatcher(CardMatcher matcher) {
         parameters.addAll(matcher.parameters());
-        resultFilters.addAll(matcher.resultFilters());
+        resultFilters.add(matcher.resultFilter());
     }
 
     /**
@@ -58,7 +58,7 @@ public class CardQuery {
     /**
      * Filters a list of card using the parameters for this query.
      *
-     * <p>This allows finer filtering than the API allows by applying additional resultFilters to the results returned by the server</p>
+     * <p>This allows finer filtering than the API allows by applying additional resultFilter to the results returned by the server</p>
      * @param results Cards returned by the server
      * @return A filtered list of Cards where all cards returned by the server that did not match exactly the criteria were removed.
      */

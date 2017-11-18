@@ -22,8 +22,8 @@ public class NameStartsWith implements NameMatcher {
     }
 
     @Override
-    public Collection<Predicate<Card>> resultFilters() {
-        return singletonList(card -> card.getName().toLowerCase().startsWith(namePrefix.toLowerCase()));
+    public Predicate<Card> resultFilter() {
+        return card -> card.getName().toLowerCase().startsWith(namePrefix.toLowerCase());
     }
 
 }

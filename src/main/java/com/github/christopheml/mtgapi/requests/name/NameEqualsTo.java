@@ -22,8 +22,8 @@ public class NameEqualsTo implements NameMatcher {
     }
 
     @Override
-    public Collection<Predicate<Card>> resultFilters() {
-        return singletonList(card -> expectedName.equalsIgnoreCase(card.getName()));
+    public Predicate<Card> resultFilter() {
+        return card -> expectedName.equalsIgnoreCase(card.getName());
     }
 
 }

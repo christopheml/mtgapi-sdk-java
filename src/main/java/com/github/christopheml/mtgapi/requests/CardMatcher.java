@@ -20,6 +20,6 @@ public interface CardMatcher {
      * Provides the result filters applied to query results.
      * @return result filters to apply to query results for this predicate.
      */
-    Collection<Predicate<Card>> resultFilters();
+    Predicate<Card> resultFilter();
 
 }
