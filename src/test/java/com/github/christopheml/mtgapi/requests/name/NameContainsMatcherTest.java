@@ -1,5 +1,6 @@
 package com.github.christopheml.mtgapi.requests.name;
 
+import com.github.christopheml.mtgapi.data.Cards;
 import com.github.christopheml.mtgapi.entities.Card;
 import com.github.christopheml.mtgapi.requests.CardQuery;
 import org.junit.Test;
@@ -8,7 +9,6 @@ import java.util.List;
 
 import static com.github.christopheml.mtgapi.requests.CardQuery.query;
 import static com.github.christopheml.mtgapi.requests.name.NameMatchers.contains;
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NameContainsMatcherTest {
@@ -22,16 +22,9 @@ public class NameContainsMatcherTest {
     @Test
     public void test_result_filters() throws Exception {
         CardQuery cardQuery = query().name(contains("Dark"));
-        List<Card> cards = asList(cardWithName("Dark Ritual"), cardWithName("Grasp of Darkness"), cardWithName("Darkness"));
+        List<Card> cards = Cards.forNames("Dark Ritual", "Grasp of Darkness", "Darkness");
         List<Card> filteredCards = cardQuery.filter(cards);
         assertThat(filteredCards).containsExactlyElementsOf(cards);
     }
-
-    private Card cardWithName(String name) {
-        Card card = new Card();
-        card.setName(name);
-        return card;
-    }
-
 
 }
