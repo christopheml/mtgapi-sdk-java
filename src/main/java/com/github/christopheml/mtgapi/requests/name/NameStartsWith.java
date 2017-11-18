@@ -12,7 +12,7 @@ public class NameStartsWith implements NameMatcher {
 
     private final String namePrefix;
 
-    public NameStartsWith(String namePrefix) {
+    NameStartsWith(String namePrefix) {
         this.namePrefix = namePrefix;
     }
 

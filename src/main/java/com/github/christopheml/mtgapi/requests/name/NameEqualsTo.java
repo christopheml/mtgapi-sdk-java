@@ -12,7 +12,7 @@ public class NameEqualsTo implements NameMatcher {
 
     private final String expectedName;
 
-    public NameEqualsTo(String expectedName) {
+    NameEqualsTo(String expectedName) {
         this.expectedName = expectedName;
     }
 

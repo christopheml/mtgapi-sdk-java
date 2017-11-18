@@ -16,7 +16,7 @@ public class NameContains implements NameMatcher {
 
     private final String fragment;
 
-    public NameContains(String fragment) {
+    NameContains(String fragment) {
         this.fragment = fragment;
     }
 

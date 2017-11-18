@@ -12,7 +12,7 @@ public class NameEndsWith implements NameMatcher {
 
     private final String suffix;
 
-    public NameEndsWith(String suffix) {
+    NameEndsWith(String suffix) {
         this.suffix = suffix;
     }
 
