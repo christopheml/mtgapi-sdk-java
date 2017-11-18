@@ -22,7 +22,7 @@ public class NameEqualsToMatcherTest {
     @Test
     public void test_result_filters() throws Exception {
         CardQuery cardQuery = query().name(equalsTo("Darkness"));
-        List<Card> cards = asList(cardWithName("Dark Ritual"), cardWithName("Grasp of Darkness"), cardWithName("Lightning Bolt"), cardWithName("Darkness"));
+        List<Card> cards = asList(cardWithName("Infernal Darkness"), cardWithName("Grasp of Darkness"), cardWithName("Clinging Darkness"), cardWithName("Darkness"));
         List<Card> filteredCards = cardQuery.filter(cards);
         assertThat(filteredCards).extracting(Card::getName).containsExactly("Darkness");
     }
