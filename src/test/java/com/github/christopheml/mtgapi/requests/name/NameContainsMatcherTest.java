@@ -8,7 +8,6 @@ import java.util.List;
 
 import static com.github.christopheml.mtgapi.requests.CardQuery.query;
 import static com.github.christopheml.mtgapi.requests.name.NameMatchers.contains;
-import static com.github.christopheml.mtgapi.requests.name.NameMatchers.equalsTo;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +15,7 @@ public class NameContainsMatcherTest {
 
     @Test
     public void url_parameter_should_be_set() throws Exception {
-        String url = query().name(equalsTo("Darkness")).toUrl("https://api.magicthegathering.io/v1/cards");
+        String url = query().name(contains("Darkness")).toUrl("https://api.magicthegathering.io/v1/cards");
         assertThat(url).isEqualTo("https://api.magicthegathering.io/v1/cards?name=Darkness");
     }
 

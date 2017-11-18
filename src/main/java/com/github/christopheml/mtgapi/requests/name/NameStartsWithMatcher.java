@@ -13,7 +13,7 @@ public class NameStartsWithMatcher implements NameMatcher {
     private final String namePrefix;
 
     public NameStartsWithMatcher(String namePrefix) {
-        this.namePrefix = namePrefix.toLowerCase();
+        this.namePrefix = namePrefix;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class NameStartsWithMatcher implements NameMatcher {
 
     @Override
     public Collection<Predicate<Card>> resultFilters() {
-        return singletonList(card -> card.getName().toLowerCase().startsWith(namePrefix));
+        return singletonList(card -> card.getName().toLowerCase().startsWith(namePrefix.toLowerCase()));
     }
 
 }
