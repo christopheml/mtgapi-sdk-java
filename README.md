@@ -28,3 +28,5 @@ List<Cards> result = cardApi.find(query()
     * Exact match
     * Contains text
     * Starting with a prefix
+    * Ending with a suffix
+

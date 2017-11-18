@@ -17,4 +17,8 @@ public final class NameMatchers {
         return new NameStartsWithMatcher(prefix);
     }
 
+    public static NameMatcher endsWith(String suffix) {
+        return new NameEndsWithMatcher(suffix);
+    }
+
 }
