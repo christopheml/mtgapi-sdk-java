@@ -63,6 +63,7 @@ public class CardQuery {
      * @return A filtered list of Cards where all cards returned by the server that did not match exactly the criteria were removed.
      */
     public List<Card> filter(List<Card> results) {
+        // Combines all filters in one.
         Predicate<Card> allFilters = resultFilters.stream().reduce(Predicate::and).orElse(x -> true);
         return results.stream().filter(allFilters).collect(Collectors.toList());
     }
