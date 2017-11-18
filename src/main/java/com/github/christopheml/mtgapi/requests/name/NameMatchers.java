@@ -6,19 +6,19 @@ public final class NameMatchers {
     }
 
     public static NameMatcher equalsTo(String name) {
-        return new NameEqualsToMatcher(name);
+        return new NameEqualsTo(name);
     }
 
     public static NameMatcher contains(String fragment) {
-        return new NameContainsMatcher(fragment);
+        return new NameContains(fragment);
     }
 
     public static NameMatcher startsWith(String prefix) {
-        return new NameStartsWithMatcher(prefix);
+        return new NameStartsWith(prefix);
     }
 
     public static NameMatcher endsWith(String suffix) {
-        return new NameEndsWithMatcher(suffix);
+        return new NameEndsWith(suffix);
     }
 
 }

@@ -8,22 +8,22 @@ import java.util.function.Predicate;
 
 import static java.util.Collections.singletonList;
 
-public class NameStartsWithMatcher implements NameMatcher {
+public class NameEndsWith implements NameMatcher {
 
-    private final String namePrefix;
+    private final String suffix;
 
-    public NameStartsWithMatcher(String namePrefix) {
-        this.namePrefix = namePrefix;
+    public NameEndsWith(String suffix) {
+        this.suffix = suffix;
     }
 
     @Override
     public Collection<CardQueryParameter> parameters() {
-        return singletonList(new CardQueryParameter("name", namePrefix));
+        return singletonList(new CardQueryParameter("name", suffix));
     }
 
     @Override
     public Collection<Predicate<Card>> resultFilters() {
-        return singletonList(card -> card.getName().toLowerCase().startsWith(namePrefix.toLowerCase()));
+        return singletonList(card -> card.getName().toLowerCase().endsWith(suffix.toLowerCase()));
     }
 
 }

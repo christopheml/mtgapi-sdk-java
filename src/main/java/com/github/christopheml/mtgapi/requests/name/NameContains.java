@@ -6,24 +6,28 @@ import com.github.christopheml.mtgapi.requests.CardQueryParameter;
 import java.util.Collection;
 import java.util.function.Predicate;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
-public class NameEqualsToMatcher implements NameMatcher {
+/**
+ * Matches cards whose name contains a given text.
+ */
+public class NameContains implements NameMatcher {
 
-    private final String expectedName;
+    private final String fragment;
 
-    public NameEqualsToMatcher(String expectedName) {
-        this.expectedName = expectedName;
+    public NameContains(String fragment) {
+        this.fragment = fragment;
     }
 
     @Override
     public Collection<CardQueryParameter> parameters() {
-        return singletonList(new CardQueryParameter("name", expectedName));
+        return singletonList(new CardQueryParameter("name", fragment));
     }
 
     @Override
     public Collection<Predicate<Card>> resultFilters() {
-        return singletonList(card -> expectedName.equalsIgnoreCase(card.getName()));
+        return emptyList();
     }
 
 }
