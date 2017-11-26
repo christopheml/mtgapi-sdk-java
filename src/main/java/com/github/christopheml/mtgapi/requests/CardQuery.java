@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Query for the Card API.
+ */
 public class CardQuery {
 
     private final List<CardQueryParameter> parameters = new ArrayList<>();

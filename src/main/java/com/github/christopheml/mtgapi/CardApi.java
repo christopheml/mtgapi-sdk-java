@@ -8,6 +8,11 @@ import com.github.christopheml.mtgapi.responses.CardsResponse;
 
 import java.util.List;
 
+/**
+ * Card API entry point.
+ *
+ * <p>Use this class to perform queries against the card enpoint.</p>
+ */
 public class CardApi {
 
     private final String endpoint;
@@ -42,7 +47,7 @@ public class CardApi {
     }
 
     /**
-     * Returns all the cards matching a specific query
+     * Returns all the cards matching a specific query.
      * @param query query object containing specific criteria for the search
      * @return a list of Cards matching the criteria
      */
